@@ -37,12 +37,17 @@ db.exec(`CREATE TABLE IF NOT EXISTS applications (
   roll TEXT NOT NULL,
   dept TEXT NOT NULL,
   institute TEXT NOT NULL,
+  university TEXT,
+  collage TEXT,
   address TEXT,
   photo_filename TEXT NOT NULL,
   experience TEXT NOT NULL,
   intro TEXT,
   reason TEXT
 )`);
+
+try { db.exec("ALTER TABLE applications ADD COLUMN university TEXT"); } catch (e) {}
+try { db.exec("ALTER TABLE applications ADD COLUMN college TEXT"); } catch (e) {}v
 
 app.set('trust proxy', 1);
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'same-origin' } }));
@@ -89,17 +94,17 @@ app.post('/api/applications', submitLimiter, upload.single('photo'), (req,res) =
   const d = req.body;
   const values = {
     post: clean(d.post,50), name: clean(d.name,120), dob: clean(d.dob,20), mobile: clean(d.mobile,10),
-    email: clean(d.email,160), year: clean(d.year,30), roll: clean(d.roll,60), dept: clean(d.dept,80),
-    institute: clean(d.institute,100), address: clean(d.address,500), experience: clean(d.experience,10),
+    email: clean(d.email,160), year: clean(d.year,30), roll: clean(d.roll,60), dept: clean(d.dept,80),university: clean(d.university,120),
+college: clean(d.college,200),institute: clean(d.institute,100), address: clean(d.address,500), experience: clean(d.experience,10),
     intro: clean(d.intro,2000), reason: clean(d.reason,2000)
   };
   if (!req.file) return res.status(400).json({error:'Candidate photo is required.'});
-  if (!allowedPosts.has(values.post) || !values.name || !values.dob || !validMobile(values.mobile) || !allowedYears.has(values.year) || !values.roll || !values.dept || !allowedInstitutes.has(values.institute) || !allowedExperience.has(values.experience)) {
+  if (!allowedPosts.has(values.post) || !values.name || !values.dob || !validMobile(values.mobile) || !allowedYears.has(values.year) || !values.roll || !values.dept || !values.university || !values.college || !allowedInstitutes.has(values.institute) || !allowedExperience.has(values.experience)) {
     fs.unlinkSync(req.file.path);
     return res.status(400).json({error:'Please complete all required fields correctly.'});
   }
   const applicationNo = newApplicationNo();
-  db.prepare(`INSERT INTO applications (application_no,created_at,post,name,dob,mobile,email,year,roll,dept,institute,address,photo_filename,experience,intro,reason)
+  db.prepare(`INSERT INTO applications (application_no,created_at,post,name,dob,mobile,email,year,roll,dept,university,college,institute,address,photo_filename,experience,intro,reason)
     VALUES (@applicationNo,@createdAt,@post,@name,@dob,@mobile,@email,@year,@roll,@dept,@institute,@address,@photoFilename,@experience,@intro,@reason)`).run({
       applicationNo, createdAt: new Date().toISOString(), ...values, photoFilename: req.file.filename
     });
@@ -129,7 +134,7 @@ app.post('/admin/applications/:id/delete', requireAdmin, (req,res) => {
 app.get('/admin', requireAdmin, (_req,res) => {
   const rows = db.prepare('SELECT * FROM applications ORDER BY id DESC').all();
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const body = rows.map(r=>`<tr><td>${esc(r.application_no)}</td><td>${esc(r.created_at)}</td><td>${esc(r.post)}</td><td>${esc(r.name)}</td><td>${esc(r.mobile)}</td><td>${esc(r.email)}</td><td>${esc(r.institute)}</td><td>${esc(r.year)}</td><td>${esc(r.roll)}</td><td>${esc(r.dept)}</td><td>${esc(r.experience)}</td><td><a target="_blank" href="/uploads/${encodeURIComponent(r.photo_filename)}">Photo</a></td><td><form method="post" action="/admin/applications/${r.id}/delete" onsubmit="return confirm('Delete this application permanently?');"><button class="delete" type="submit">Delete</button></form></td></tr>`).join('');
+  const body = rows.map(r=>`<tr><td>${esc(r.application_no)}</td><td>${esc(r.created_at)}</td><td>${esc(r.post)}</td><td>${esc(r.name)}</td><td>${esc(r.mobile)}</td><td>${esc(r.email)}</td><td>${esc(r.university)}</td><td>${esc(r.college)}</td><td>${esc(r.institute)}</td><td>${esc(r.year)}</td><td>${esc(r.roll)}</td><td>${esc(r.dept)}</td><td>${esc(r.experience)}</td><td><a target="_blank" href="/uploads/${encodeURIComponent(r.photo_filename)}">Photo</a></td><td><form method="post" action="/admin/applications/${r.id}/delete" onsubmit="return confirm('Delete this application permanently?');"><button class="delete" type="submit">Delete</button></form></td></tr>`).join('');
   res.send(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>RLAP Admin Applications</title><style>body{font-family:Arial,sans-serif;background:#edf2ed;margin:0;color:#17321f}header{background:#075b2d;color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}button{padding:9px 14px;border:0;border-radius:7px;font-weight:700}main{padding:18px;overflow:auto}table{background:#fff;border-collapse:collapse;min-width:1400px}th,td{border:1px solid #d9e4db;padding:9px;text-align:left;font-size:13px}th{background:#f3d51b}.delete{background:#b42318;color:#fff;cursor:pointer}h2{color:#075b2d}</style></head><body><header><b>RLAP — Admin Applications</b><form method="post" action="/admin/logout"><button>Logout</button></form></header><main><h2>Submitted Applications (${rows.length})</h2><table><thead><tr><th>Application No.</th><th>Submitted</th><th>Post</th><th>Name</th><th>Mobile</th><th>Email</th><th>Institute</th><th>Year</th><th>Roll</th><th>Department</th><th>Experience</th><th>Photo</th><th>Action</th></tr></thead><tbody>${body || '<tr><td colspan="13">No applications yet.</td></tr>'}</tbody></table></main></body></html>`);
 });
 
