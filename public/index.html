@@ -135,37 +135,7 @@ body{padding-top:112px!important}
   <label>College / कॉलेज</label>
   <select required name="college" id="college">
     <option value="">Select College</option>
-</select>
-</div>
-<div class="field"><label>पता / Address</label><input name="address"></div>
-</div></div>
-<div class="ph">3. फोटो एवं पूर्व चुनाव अनुभव / Photo & Previous Election Experience</div><div class="pb"><div class="two">
-<div class="upload"><b>उम्मीदवार की फोटो / Candidate Photo *</b><br><input required type="file" accept="image/*" name="photo"></div>
-<div><div class="field"><label>क्या आपने पहले किसी छात्र/कॉलेज चुनाव में भाग लिया है? *</label></div>
-<label class="post"><input required type="radio" name="experience" value="Yes"> हाँ / Yes</label>
-<label class="post" style="margin-top:8px"><input type="radio" name="experience" value="No"> नहीं / No</label></div>
-</div></div>
-<div class="ph">4. अतिरिक्त जानकारी / Additional Information</div><div class="pb"><div class="two">
-<div class="field"><label>संक्षिप्त परिचय / Brief Introduction</label><textarea name="intro"></textarea></div>
-<div class="field"><label>चुनाव लड़ने का उद्देश्य / Purpose</label><textarea name="reason"></textarea></div>
-</div><div class="actions"><button class="reset" type="reset">रीसेट / Reset</button><button class="submit" type="submit">आवेदन जमा करें / Submit Application</button></div><div class="success" id="success"></div></div>
-</form>
-</div>
-
-<aside class="side">
-<div class="box symbol"><h3>चुनाव चिन्ह / Election Symbol</h3><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTYwIj48cmVjdCB4PSIzMiIgeT0iNSIgd2lkdGg9IjM2IiBoZWlnaHQ9IjE4IiByeD0iNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDc1YjJkIiBzdHJva2Utd2lkdGg9IjUiLz48cGF0aCBkPSJNMjcgMjVoNDZ2MTVjMCA4IDggMTIgOCAyM3Y2MmMwIDE2LTEwIDI1LTI5IDI1cy0yOS05LTI5LTI1VjYzYzAtMTEgOC0xNSA4LTIzeiIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzA3NWIyZCIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTI1IDYzaDUwTTI1IDc4aDUwTTI1IDkzaDUwTTI1IDEwOGg1ME0yNSAxMjNoNTAiIHN0cm9rZT0iIzA3NWIyZCIgc3Ryb2tlLXdpZHRoPSI0Ii8+PC9zdmc+" style="width:95px;height:120px"><b>पानी की बोतल / Water Bottle</b><div class="yellow" style="margin:14px -18px -18px;padding:10px;font-weight:900">स्वच्छ • सरल • समर्पित</div></div>
-<div class="box" id="about"><h3>हमारा उद्देश्य / Our Vision</h3><p>शिक्षित युवा<br>सशक्त कृषि<br>समृद्ध भारत</p><hr><b>युवा शक्ति • किसान शक्ति • राष्ट्र शक्ति</b></div>
-<div class="box"><h3>क्यों RLAP?</h3><p>✓ Students' Voice<br>✓ Equal Opportunity<br>✓ Transparent Process<br>✓ Better Education<br>✓ Stronger Agriculture</p></div>
-<div class="box yellow"><h3>महत्वपूर्ण सूचना</h3><p>सभी उम्मीदवार अपनी जानकारी सही भरें। आवेदन सूची केवल अधिकृत व्यवस्थापक के लिए उपलब्ध होगी।</p></div>
-</aside>
-</div>
-
-
-</main>
-
-<footer id="contact">राष्ट्रीय लोकतांत्रिक कृषि पार्टी (RLAP) • स्वच्छ • सरल • समर्पित</footer>
-
-<script src="/app.js" defer></script>
+   <script src="/app.js" defer></script>
 <script> const universityCollegeMap = {
   "Agriculture University, Jodhpur": [
     "College of Agriculture, Jodhpur",
@@ -280,5 +250,36 @@ if (universitySelect && collegeSelect) {
   });
 }
 </script>
+</select>
+</div>
+<div class="field"><label>पता / Address</label><input name="address"></div>
+</div></div>
+<div class="ph">3. फोटो एवं पूर्व चुनाव अनुभव / Photo & Previous Election Experience</div><div class="pb"><div class="two">
+<div class="upload"><b>उम्मीदवार की फोटो / Candidate Photo *</b><br><input required type="file" accept="image/*" name="photo"></div>
+<div><div class="field"><label>क्या आपने पहले किसी छात्र/कॉलेज चुनाव में भाग लिया है? *</label></div>
+<label class="post"><input required type="radio" name="experience" value="Yes"> हाँ / Yes</label>
+<label class="post" style="margin-top:8px"><input type="radio" name="experience" value="No"> नहीं / No</label></div>
+</div></div>
+<div class="ph">4. अतिरिक्त जानकारी / Additional Information</div><div class="pb"><div class="two">
+<div class="field"><label>संक्षिप्त परिचय / Brief Introduction</label><textarea name="intro"></textarea></div>
+<div class="field"><label>चुनाव लड़ने का उद्देश्य / Purpose</label><textarea name="reason"></textarea></div>
+</div><div class="actions"><button class="reset" type="reset">रीसेट / Reset</button><button class="submit" type="submit">आवेदन जमा करें / Submit Application</button></div><div class="success" id="success"></div></div>
+</form>
+</div>
+
+<aside class="side">
+<div class="box symbol"><h3>चुनाव चिन्ह / Election Symbol</h3><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTYwIj48cmVjdCB4PSIzMiIgeT0iNSIgd2lkdGg9IjM2IiBoZWlnaHQ9IjE4IiByeD0iNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDc1YjJkIiBzdHJva2Utd2lkdGg9IjUiLz48cGF0aCBkPSJNMjcgMjVoNDZ2MTVjMCA4IDggMTIgOCAyM3Y2MmMwIDE2LTEwIDI1LTI5IDI1cy0yOS05LTI5LTI1VjYzYzAtMTEgOC0xNSA4LTIzeiIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzA3NWIyZCIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTI1IDYzaDUwTTI1IDc4aDUwTTI1IDkzaDUwTTI1IDEwOGg1ME0yNSAxMjNoNTAiIHN0cm9rZT0iIzA3NWIyZCIgc3Ryb2tlLXdpZHRoPSI0Ii8+PC9zdmc+" style="width:95px;height:120px"><b>पानी की बोतल / Water Bottle</b><div class="yellow" style="margin:14px -18px -18px;padding:10px;font-weight:900">स्वच्छ • सरल • समर्पित</div></div>
+<div class="box" id="about"><h3>हमारा उद्देश्य / Our Vision</h3><p>शिक्षित युवा<br>सशक्त कृषि<br>समृद्ध भारत</p><hr><b>युवा शक्ति • किसान शक्ति • राष्ट्र शक्ति</b></div>
+<div class="box"><h3>क्यों RLAP?</h3><p>✓ Students' Voice<br>✓ Equal Opportunity<br>✓ Transparent Process<br>✓ Better Education<br>✓ Stronger Agriculture</p></div>
+<div class="box yellow"><h3>महत्वपूर्ण सूचना</h3><p>सभी उम्मीदवार अपनी जानकारी सही भरें। आवेदन सूची केवल अधिकृत व्यवस्थापक के लिए उपलब्ध होगी।</p></div>
+</aside>
+</div>
+
+
+</main>
+
+<footer id="contact">राष्ट्रीय लोकतांत्रिक कृषि पार्टी (RLAP) • स्वच्छ • सरल • समर्पित</footer>
+
+
 
 </body></html>
