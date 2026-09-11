@@ -164,7 +164,7 @@ f.addEventListener('submit',async e=>{
   const r=await fetch('/api/applications',{method:'POST',body:new FormData(f)});
   const data=await r.json();
   if(!r.ok) throw new Error(data.error||'Submission failed');
-  const s=document.getElementById('success'); s.style.display='block'; s.textContent='आवेदन सफलतापूर्वक जमा हुआ। Application No.: '+data.applicationNo; f.reset();
+  const s=document.getElementById('success'); s.style.display='block'; s.innerHTML='<strong style="font-size:20px">Thank you for join us!</strong><br><span style="display:block;margin-top:6px">हमसे जुड़ने के लिए धन्यवाद!</span><span style="display:block;margin-top:6px">Application No.: '+data.applicationNo+'</span>'; f.reset();
  }catch(err){ alert(err.message); }
  finally{ btn.disabled=false; btn.textContent='आवेदन जमा करें / Submit Application'; }
 });
