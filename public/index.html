@@ -166,4 +166,119 @@ body{padding-top:112px!important}
 <footer id="contact">राष्ट्रीय लोकतांत्रिक कृषि पार्टी (RLAP) • स्वच्छ • सरल • समर्पित</footer>
 
 <script src="/app.js" defer></script>
+<script> const universityCollegeMap = {
+  "Agriculture University, Jodhpur": [
+    "College of Agriculture, Jodhpur",
+    "College of Agriculture, Sumerpur",
+    "College of Agriculture, Nagaur",
+    "College of Agriculture, Baytu",
+    "Government Agriculture College, Deedwana",
+    "Government Agriculture College, Nawa City",
+    "Government Agriculture College, Osian",
+    "Government Agriculture College, Barmer",
+    "Government Agriculture College, Gudamalani Barmer",
+    "Government Agriculture College, Keshwana (Jalore)",
+    "Government Agriculture College, Sirohi"
+  ],
+
+  "Agriculture University, Kota": [
+    "College of Agriculture, Ummedganj, Kota",
+    "College of Agriculture, Hindoli",
+    "Government Agriculture College, Sawai Madhopur",
+    "Government Agriculture College, Karauli",
+    "Government Agriculture College, Baran",
+    "Government Agriculture College, Todabhim",
+    "Government Agriculture College, Behrawanda Khurd (Khandar)",
+    "Government Agriculture College, Shahbad, Kelwada",
+    "Government College, Sapotra (Raj.)",
+    "Coll of Hort. & Forst. (Hort), Jhalawar",
+    "Government Agriculture College, Hindaun City",
+    "Government Agriculture College, Gangapur City, Sawai Madhopur",
+    "Coll of Hort. & Forst. (Forest), Jhalawar"
+  ],
+
+  "SKN Agriculture University, Jobner": [
+    "SKN College of Agriculture, Jobner",
+    "College of Agriculture, Kumher-Bharatpur",
+    "College of Agriculture, Fatehpur-Shekhawati",
+    "College of Agriculture, Lalsot",
+    "College of Agriculture, Kotputali, Jaipur",
+    "Government College, Uniara, Tonk",
+    "College of Agriculture, Navgaon Alwar",
+    "College of Agriculture, Kishangarh Bas-Alwar",
+    "College of Agriculture, Basedi, Dholpur",
+    "BBD Government College (Government Agriculture College), Chimanpura",
+    "College of Agriculture, Jhilai-Tonk",
+    "College of Agriculture, Peethampuri-Sikar",
+    "College of Agriculture, Bhusawar (Weir) Bharatpur",
+    "Government Agriculture College, Mundawar",
+    "Government Agriculture College, Tijara",
+    "Government Agriculture College, Kekri",
+    "Government Agriculture College, Bharatpur (MSJ)",
+    "Government Agriculture College, Pahari (Kaman), Bharatpur",
+    "Government Agriculture College, Khedlabujurg (Mahwa)",
+    "Government Agriculture College, Sikri, Bharatpur",
+    "Government Agriculture College, Dausa",
+    "Government Agriculture College, Dholpur",
+    "Government Agriculture College, Machadi (Reni) Alwar",
+    "Government Agriculture College, Maujamabad (Dudu)",
+    "Government Agriculture College, Bahravanda (Sikrai), Dausa",
+    "Horticultural College, RARI Durgapura",
+    "Government Agriculture College, Kumher (Deeg)",
+    "Government Agriculture College, Balahera (Mahwa, Dausa)",
+    "Government Agriculture College, Jamwaramgarh (Jaipur)"
+  ],
+
+  "SKRAU, Bikaner": [
+    "College of Agriculture, Bikaner",
+    "College of Agriculture, Sriganganagar",
+    "College of Agriculture, Hanumangarh",
+    "College of Agriculture, Chandgothi",
+    "Government Agriculture College, Chirawa, Jhunjhunu",
+    "Government Agriculture College, Pokaran Jaisalmer",
+    "Government Agriculture College, Nohar-Hanumangarh",
+    "Government Agriculture College, Jogiwala-Bhadra",
+    "Government Agriculture College, Taranagar",
+    "Government Agriculture College, Churu",
+    "Late Shri Ramnarayan Choudhary Agriculture College, Mandawa"
+  ],
+
+  "MPUAT, Udaipur": [
+    "Rajasthan College of Agriculture, Udaipur",
+    "College of Agriculture, Suwana-Bhilwara",
+    "College of Agriculture, Dungarpur",
+    "Government Agriculture College, Phuliakalan (Shahpura)",
+    "Government Agriculture College, Pratapgarh",
+    "Government Agriculture College, Kherwara-Udaipur",
+    "Government Agriculture College, Borwat-Banswara",
+    "Government Agriculture College, Bassi-Chittorgarh",
+    "Government Agriculture College, Gogunda-Udaipur",
+    "Government Agriculture College, Gangapur-Bhilwara",
+    "Government Agriculture College, Rawatbhata",
+    "Government Agriculture College, Mandalgarh, Bhilwara",
+    "Government Agriculture College, Piploond, Jahajpur, Bhilwara",
+    "Government Agriculture College, Rajsamand"
+  ]
+};
+
+const universitySelect = document.getElementById("university");
+const collegeSelect = document.getElementById("college");
+
+if (universitySelect && collegeSelect) {
+  universitySelect.addEventListener("change", function () {
+    collegeSelect.innerHTML =
+      '<option value="">Select College</option>';
+
+    const colleges = universityCollegeMap[this.value] || [];
+
+    colleges.forEach(function (college) {
+      const option = document.createElement("option");
+      option.value = college;
+      option.textContent = college;
+      collegeSelect.appendChild(option);
+    });
+  });
+}
+</script>
+
 </body></html>
