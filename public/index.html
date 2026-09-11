@@ -135,7 +135,8 @@ body{padding-top:112px!important}
   <label>College / कॉलेज</label>
   <select required name="college" id="college">
     <option value="">Select College</option>
-   <script src="/app.js" defer></script>
+  </select>
+</div>
 <script> const universityCollegeMap = {
   "Agriculture University, Jodhpur": [
     "College of Agriculture, Jodhpur",
@@ -250,9 +251,8 @@ if (universitySelect && collegeSelect) {
   });
 }
 </script>
-</select>
-</div>
-<div class="field"><label>पता / Address</label><input name="address"></div>
+
+ <div class="field"><label>पता / Address</label><input name="address"></div>
 </div></div>
 <div class="ph">3. फोटो एवं पूर्व चुनाव अनुभव / Photo & Previous Election Experience</div><div class="pb"><div class="two">
 <div class="upload"><b>उम्मीदवार की फोटो / Candidate Photo *</b><br><input required type="file" accept="image/*" name="photo"></div>
@@ -281,5 +281,6 @@ if (universitySelect && collegeSelect) {
 <footer id="contact">राष्ट्रीय लोकतांत्रिक कृषि पार्टी (RLAP) • स्वच्छ • सरल • समर्पित</footer>
 
 
-
-</body></html>
+<script src="/app.js" defer></script>
+</body>
+</html>
