@@ -119,138 +119,220 @@ body{padding-top:112px!important}
 <div class="field"><label>कक्षा / वर्तमान वर्ष / Current Year *</label><select required name="year"><option value="">Select</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Other</option></select></div>
 <div class="field"><label>रोल नंबर / Roll Number *</label><input required name="roll"></div>
 <div class="field"><label>विभाग / Department *</label><select required name="dept"><option value="">Select</option><option>Agriculture</option><option>Other</option></select></div>
+<!-- University -->
 <div class="field">
   <label>University / विश्वविद्यालय</label>
   <select required name="university" id="university">
     <option value="">Select University</option>
-    <option value="Agriculture University, Jodhpur">Agriculture University, Jodhpur</option>
-    <option value="Agriculture University, Kota">Agriculture University, Kota</option>
-    <option value="SKN Agriculture University, Jobner">SKN Agriculture University, Jobner</option>
-    <option value="SKRAU, Bikaner">SKRAU, Bikaner</option>
-    <option value="MPUAT, Udaipur">MPUAT, Udaipur</option>
+
+    <option value="Agriculture University, Jodhpur">
+      Agriculture University, Jodhpur
+    </option>
+
+    <option value="Agriculture University, Kota">
+      Agriculture University, Kota
+    </option>
+
+    <option value="SKN Agriculture University, Jobner">
+      SKN Agriculture University, Jobner
+    </option>
+
+    <option value="SKRAU, Bikaner">
+      SKRAU, Bikaner
+    </option>
+
+    <option value="MPUAT, Udaipur">
+      MPUAT, Udaipur
+    </option>
   </select>
 </div>
 
+<!-- College -->
 <div class="field">
   <label>College / कॉलेज</label>
-  <select required name="college" id="college">
-    <option value="">Select College</option>
+  <select required name="college" id="college" disabled>
+    <option value="">First select University</option>
   </select>
 </div>
-<script> const universityCollegeMap = {
-  "Agriculture University, Jodhpur": [
-    "College of Agriculture, Jodhpur",
-    "College of Agriculture, Sumerpur",
-    "College of Agriculture, Nagaur",
-    "College of Agriculture, Baytu",
-    "Government Agriculture College, Deedwana",
-    "Government Agriculture College, Nawa City",
-    "Government Agriculture College, Osian",
-    "Government Agriculture College, Barmer",
-    "Government Agriculture College, Gudamalani Barmer",
-    "Government Agriculture College, Keshwana (Jalore)",
-    "Government Agriculture College, Sirohi"
-  ],
 
-  "Agriculture University, Kota": [
-    "College of Agriculture, Ummedganj, Kota",
-    "College of Agriculture, Hindoli",
-    "Government Agriculture College, Sawai Madhopur",
-    "Government Agriculture College, Karauli",
-    "Government Agriculture College, Baran",
-    "Government Agriculture College, Todabhim",
-    "Government Agriculture College, Behrawanda Khurd (Khandar)",
-    "Government Agriculture College, Shahbad, Kelwada",
-    "Government College, Sapotra (Raj.)",
-    "Coll of Hort. & Forst. (Hort), Jhalawar",
-    "Government Agriculture College, Hindaun City",
-    "Government Agriculture College, Gangapur City, Sawai Madhopur",
-    "Coll of Hort. & Forst. (Forest), Jhalawar"
-  ],
+<script>
+(function () {
 
-  "SKN Agriculture University, Jobner": [
-    "SKN College of Agriculture, Jobner",
-    "College of Agriculture, Kumher-Bharatpur",
-    "College of Agriculture, Fatehpur-Shekhawati",
-    "College of Agriculture, Lalsot",
-    "College of Agriculture, Kotputali, Jaipur",
-    "Government College, Uniara, Tonk",
-    "College of Agriculture, Navgaon Alwar",
-    "College of Agriculture, Kishangarh Bas-Alwar",
-    "College of Agriculture, Basedi, Dholpur",
-    "BBD Government College (Government Agriculture College), Chimanpura",
-    "College of Agriculture, Jhilai-Tonk",
-    "College of Agriculture, Peethampuri-Sikar",
-    "College of Agriculture, Bhusawar (Weir) Bharatpur",
-    "Government Agriculture College, Mundawar",
-    "Government Agriculture College, Tijara",
-    "Government Agriculture College, Kekri",
-    "Government Agriculture College, Bharatpur (MSJ)",
-    "Government Agriculture College, Pahari (Kaman), Bharatpur",
-    "Government Agriculture College, Khedlabujurg (Mahwa)",
-    "Government Agriculture College, Sikri, Bharatpur",
-    "Government Agriculture College, Dausa",
-    "Government Agriculture College, Dholpur",
-    "Government Agriculture College, Machadi (Reni) Alwar",
-    "Government Agriculture College, Maujamabad (Dudu)",
-    "Government Agriculture College, Bahravanda (Sikrai), Dausa",
-    "Horticultural College, RARI Durgapura",
-    "Government Agriculture College, Kumher (Deeg)",
-    "Government Agriculture College, Balahera (Mahwa, Dausa)",
-    "Government Agriculture College, Jamwaramgarh (Jaipur)"
-  ],
+  const universityCollegeMap = {
 
-  "SKRAU, Bikaner": [
-    "College of Agriculture, Bikaner",
-    "College of Agriculture, Sriganganagar",
-    "College of Agriculture, Hanumangarh",
-    "College of Agriculture, Chandgothi",
-    "Government Agriculture College, Chirawa, Jhunjhunu",
-    "Government Agriculture College, Pokaran Jaisalmer",
-    "Government Agriculture College, Nohar-Hanumangarh",
-    "Government Agriculture College, Jogiwala-Bhadra",
-    "Government Agriculture College, Taranagar",
-    "Government Agriculture College, Churu",
-    "Late Shri Ramnarayan Choudhary Agriculture College, Mandawa"
-  ],
+    "Agriculture University, Jodhpur": [
+      "College of Agriculture, Jodhpur",
+      "College of Agriculture, Sumerpur",
+      "College of Agriculture, Nagaur",
+      "College of Agriculture, Baytu",
+      "Government Agriculture College, Deedwana",
+      "Government Agriculture College, Nawa City",
+      "Government Agriculture College, Osian",
+      "Government Agriculture College, Barmer",
+      "Government Agriculture College, Gudamalani, Barmer",
+      "Government Agriculture College, Keshwana (Jalore)",
+      "Government Agriculture College, Sirohi"
+    ],
 
-  "MPUAT, Udaipur": [
-    "Rajasthan College of Agriculture, Udaipur",
-    "College of Agriculture, Suwana-Bhilwara",
-    "College of Agriculture, Dungarpur",
-    "Government Agriculture College, Phuliakalan (Shahpura)",
-    "Government Agriculture College, Pratapgarh",
-    "Government Agriculture College, Kherwara-Udaipur",
-    "Government Agriculture College, Borwat-Banswara",
-    "Government Agriculture College, Bassi-Chittorgarh",
-    "Government Agriculture College, Gogunda-Udaipur",
-    "Government Agriculture College, Gangapur-Bhilwara",
-    "Government Agriculture College, Rawatbhata",
-    "Government Agriculture College, Mandalgarh, Bhilwara",
-    "Government Agriculture College, Piploond, Jahajpur, Bhilwara",
-    "Government Agriculture College, Rajsamand"
-  ]
-};
+    "Agriculture University, Kota": [
+      "College of Agriculture, Ummedganj, Kota",
+      "College of Agriculture, Hindoli",
+      "Government Agriculture College, Sawai Madhopur",
+      "Government Agriculture College, Karauli",
+      "Government Agriculture College, Baran",
+      "Government Agriculture College, Todabhim",
+      "Government Agriculture College, Behrawanda Khurd (Khandar)",
+      "Government Agriculture College, Shahbad, Kelwada",
+      "Government College, Sapotra (Raj.)",
+      "Coll of Hort. & Forst. (Hort), Jhalawar",
+      "Government Agriculture College, Hindaun City",
+      "Government Agriculture College, Gangapur City, Sawai Madhopur",
+      "Coll of Hort. & Forst. (Forest), Jhalawar"
+    ],
 
-const universitySelect = document.getElementById("university");
-const collegeSelect = document.getElementById("college");
+    "SKN Agriculture University, Jobner": [
+      "SKN College of Agriculture, Jobner",
+      "College of Agriculture, Kumher-Bharatpur",
+      "College of Agriculture, Fatehpur-Shekhawati",
+      "College of Agriculture, Lalsot",
+      "College of Agriculture, Kotputali, Jaipur",
+      "Government College, Uniara, Tonk",
+      "College of Agriculture, Navgaon Alwar",
+      "College of Agriculture, Kishangarh Bas-Alwar",
+      "College of Agriculture, Basedi, Dholpur",
+      "BBD Government College (Government Agriculture College), Chimanpura",
+      "College of Agriculture, Jhilai-Tonk",
+      "College of Agriculture, Peethampuri-Sikar",
+      "College of Agriculture, Bhusawar (Weir) Bharatpur",
+      "Government Agriculture College, Mundawar",
+      "Government Agriculture College, Tijara",
+      "Government Agriculture College, Kekri",
+      "Government Agriculture College, Bharatpur (MSJ)",
+      "Government Agriculture College, Pahari (Kaman), Bharatpur",
+      "Government Agriculture College, Khedlabujurg (Mahwa)",
+      "Government Agriculture College, Sikri, Bharatpur",
+      "Government Agriculture College, Dausa",
+      "Government Agriculture College, Dholpur",
+      "Government Agriculture College, Machadi (Reni) Alwar",
+      "Government Agriculture College, Maujamabad (Dudu)",
+      "Government Agriculture College, Bahravanda (Sikrai), Dausa",
+      "Horticultural College, RARI Durgapura",
+      "Government Agriculture College, Kumher (Deeg)",
+      "Government Agriculture College, Balahera (Mahwa, Dausa)",
+      "Government Agriculture College, Jamwaramgarh (Jaipur)"
+    ],
 
-if (universitySelect && collegeSelect) {
-  universitySelect.addEventListener("change", function () {
-    collegeSelect.innerHTML =
-      '<option value="">Select College</option>';
+    "SKRAU, Bikaner": [
+      "College of Agriculture, Bikaner",
+      "College of Agriculture, Sriganganagar",
+      "College of Agriculture, Hanumangarh",
+      "College of Agriculture, Chandgothi",
+      "Government Agriculture College, Chirawa, Jhunjhunu",
+      "Government Agriculture College, Pokaran Jaisalmer",
+      "Government Agriculture College, Nohar-Hanumangarh",
+      "Government Agriculture College, Jogiwala-Bhadra",
+      "Government Agriculture College, Taranagar",
+      "Government Agriculture College, Churu",
+      "Late Shri Ramnarayan Choudhary Agriculture College, Mandawa"
+    ],
 
-    const colleges = universityCollegeMap[this.value] || [];
+    "MPUAT, Udaipur": [
+      "Rajasthan College of Agriculture, Udaipur",
+      "College of Agriculture, Suwana-Bhilwara",
+      "College of Agriculture, Dungarpur",
+      "Government Agriculture College, Phuliakalan (Shahpura)",
+      "Government Agriculture College, Pratapgarh",
+      "Government Agriculture College, Kherwara-Udaipur",
+      "Government Agriculture College, Borwat-Banswara",
+      "Government Agriculture College, Bassi-Chittorgarh",
+      "Government Agriculture College, Gogunda-Udaipur",
+      "Government Agriculture College, Gangapur-Bhilwara",
+      "Government Agriculture College, Rawatbhata",
+      "Government Agriculture College, Mandalgarh, Bhilwara",
+      "Government Agriculture College, Piploond, Jahajpur, Bhilwara",
+      "Government Agriculture College, Rajsamand"
+    ]
+  };
 
-    colleges.forEach(function (college) {
-      const option = document.createElement("option");
-      option.value = college;
-      option.textContent = college;
-      collegeSelect.appendChild(option);
+
+  function setupUniversityCollege() {
+
+    const universitySelect =
+      document.getElementById("university");
+
+    const collegeSelect =
+      document.getElementById("college");
+
+    if (!universitySelect || !collegeSelect) return;
+
+
+    universitySelect.addEventListener("change", function () {
+
+      const selectedUniversity = this.value;
+
+      const colleges =
+        universityCollegeMap[selectedUniversity] || [];
+
+
+      // Clear old college options
+      collegeSelect.innerHTML = "";
+
+
+      // First option
+      const firstOption =
+        document.createElement("option");
+
+      firstOption.value = "";
+
+      firstOption.textContent =
+        colleges.length
+          ? "Select College"
+          : "No colleges available";
+
+      collegeSelect.appendChild(firstOption);
+
+
+      // Enable / disable college
+      collegeSelect.disabled =
+        colleges.length === 0;
+
+
+      // Add colleges of selected university
+      colleges.forEach(function (college) {
+
+        const option =
+          document.createElement("option");
+
+        option.value = college;
+        option.textContent = college;
+
+        collegeSelect.appendChild(option);
+      });
+
+
+      // Reset selection
+      collegeSelect.value = "";
     });
-  });
-}
+  }
+
+
+  // Make sure the form is loaded first
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      setupUniversityCollege
+    );
+
+  } else {
+
+    setupUniversityCollege();
+
+  }
+
+})();
 </script>
+
 
  <div class="field"><label>पता / Address</label><input name="address"></div>
 </div></div>
