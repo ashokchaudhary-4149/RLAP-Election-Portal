@@ -112,11 +112,25 @@ app.post('/admin/login', loginLimiter, (req,res) => {
   req.session.regenerate(err => { if (err) return res.status(500).send('Login error'); req.session.isAdmin=true; res.redirect('/admin'); });
 });
 app.post('/admin/logout', requireAdmin, (req,res) => req.session.destroy(() => res.redirect('/admin/login')));
+
+app.post('/admin/applications/:id/delete', requireAdmin, (req,res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id < 1) return res.status(400).send('Invalid application.');
+  const row = db.prepare('SELECT photo_filename FROM applications WHERE id = ?').get(id);
+  if (!row) return res.status(404).send('Application not found.');
+  db.prepare('DELETE FROM applications WHERE id = ?').run(id);
+  if (row.photo_filename) {
+    const photoPath = path.join(uploadDir, path.basename(row.photo_filename));
+    try { if (fs.existsSync(photoPath)) fs.unlinkSync(photoPath); } catch (_) {}
+  }
+  res.redirect('/admin');
+});
+
 app.get('/admin', requireAdmin, (_req,res) => {
   const rows = db.prepare('SELECT * FROM applications ORDER BY id DESC').all();
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const body = rows.map(r=>`<tr><td>${esc(r.application_no)}</td><td>${esc(r.created_at)}</td><td>${esc(r.post)}</td><td>${esc(r.name)}</td><td>${esc(r.mobile)}</td><td>${esc(r.email)}</td><td>${esc(r.institute)}</td><td>${esc(r.year)}</td><td>${esc(r.roll)}</td><td>${esc(r.dept)}</td><td>${esc(r.experience)}</td><td><a target="_blank" href="/uploads/${encodeURIComponent(r.photo_filename)}">Photo</a></td></tr>`).join('');
-  res.send(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>RLAP Admin Applications</title><style>body{font-family:Arial,sans-serif;background:#edf2ed;margin:0;color:#17321f}header{background:#075b2d;color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}button{padding:9px 14px;border:0;border-radius:7px;font-weight:700}main{padding:18px;overflow:auto}table{background:#fff;border-collapse:collapse;min-width:1300px}th,td{border:1px solid #d9e4db;padding:9px;text-align:left;font-size:13px}th{background:#f3d51b}h2{color:#075b2d}</style></head><body><header><b>RLAP — Admin Applications</b><form method="post" action="/admin/logout"><button>Logout</button></form></header><main><h2>Submitted Applications (${rows.length})</h2><table><thead><tr><th>Application No.</th><th>Submitted</th><th>Post</th><th>Name</th><th>Mobile</th><th>Email</th><th>Institute</th><th>Year</th><th>Roll</th><th>Department</th><th>Experience</th><th>Photo</th></tr></thead><tbody>${body || '<tr><td colspan="12">No applications yet.</td></tr>'}</tbody></table></main></body></html>`);
+  const body = rows.map(r=>`<tr><td>${esc(r.application_no)}</td><td>${esc(r.created_at)}</td><td>${esc(r.post)}</td><td>${esc(r.name)}</td><td>${esc(r.mobile)}</td><td>${esc(r.email)}</td><td>${esc(r.institute)}</td><td>${esc(r.year)}</td><td>${esc(r.roll)}</td><td>${esc(r.dept)}</td><td>${esc(r.experience)}</td><td><a target="_blank" href="/uploads/${encodeURIComponent(r.photo_filename)}">Photo</a></td><td><form method="post" action="/admin/applications/${r.id}/delete" onsubmit="return confirm('Delete this application permanently?');"><button class="delete" type="submit">Delete</button></form></td></tr>`).join('');
+  res.send(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>RLAP Admin Applications</title><style>body{font-family:Arial,sans-serif;background:#edf2ed;margin:0;color:#17321f}header{background:#075b2d;color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}button{padding:9px 14px;border:0;border-radius:7px;font-weight:700}main{padding:18px;overflow:auto}table{background:#fff;border-collapse:collapse;min-width:1400px}th,td{border:1px solid #d9e4db;padding:9px;text-align:left;font-size:13px}th{background:#f3d51b}.delete{background:#b42318;color:#fff;cursor:pointer}h2{color:#075b2d}</style></head><body><header><b>RLAP — Admin Applications</b><form method="post" action="/admin/logout"><button>Logout</button></form></header><main><h2>Submitted Applications (${rows.length})</h2><table><thead><tr><th>Application No.</th><th>Submitted</th><th>Post</th><th>Name</th><th>Mobile</th><th>Email</th><th>Institute</th><th>Year</th><th>Roll</th><th>Department</th><th>Experience</th><th>Photo</th><th>Action</th></tr></thead><tbody>${body || '<tr><td colspan="13">No applications yet.</td></tr>'}</tbody></table></main></body></html>`);
 });
 
 app.use(express.static(path.join(root,'public'), { index:false }));
